@@ -1,77 +1,164 @@
 <!-- THE GOAL IS A TUTORIAL FOR BUILDING THE FEEDBACK HTML APP -->
 <!-- CONTACT: bob.van.luijt@ing.nl / @bobvanluijt -->
 <!-- TO UNDERSTAND THE APP, READ THE CSS AND JS COMMENTS -->
-<!DOCTYPE html>
+<!-- NOTE: Keyframes don't accept numbers, so A = 1, B = 2 etc. -->
+<!DOCTYPE html><!-- HTML5 -->
 <html>
 <head>
-<meta charset="UTF-8">
-<title>ING feedback - Do You Love Us?</title>
-	<!-- USING ING'S THE GUIDE -->
-	<link rel="stylesheet" href="https://www.ing.nl/assets/web/ng/css/b05259ab.the-guide-styles-responsive.min.css">
-	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0"><!-- SET THE VIEWPORT FOR RESPONSIVENESS -->
+	<meta name="robots" content="noindex"><!-- DON'T INDEX US PLEASE... -->
+	<title>ING feedback - Do You Love Us?</title>
+		<!-- USING ING'S THE GUIDE -->
+		<link rel="stylesheet" href="https://www.ing.nl/assets/web/ng/css/b05259ab.the-guide-styles-responsive.min.css">
+		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 
-	<style>
-	/**
-	 * The body background is the key color 
-	 * The feedback prefix is used for this example
-	 */
-	body {
-		background-color: #FF6200; /* This is the initial 'middle' color */
-	}
-	/**
-	 * All h1's that start with feedbackHeading
-	 * Note: using important to overwrite The Guide
-	 */
-	.feedbackHeading {
-		color 		: #FFF !important;
-		text-align 	: center;
-	}
-	/**
-	 * The bold edition...
-	 * Note: using important to overwrite The Guide
-	 */
-	.feedbackHeading-normal {
-		color 		: #FFF !important;
-		text-align 	: center;
-		font-style 	: normal !important;
-		font-weight : normal !important;
-	}
-	/**
-	 * The head container is used to overlap images
-	 */
-	.feedbackHeadContainer {
-		position	: relative;
-		width		: 64%;
-		height		: 64%;
-		left 		: 50%;
-		margin-left : -32%;
-	}
-	/**
-	 * The feedback head
-	 * Note I: Note how sizes are set in %, this is for responsiveness
-	 */
-	img[class^="feedbackHead"]{
-		position		: relative;
-		width			: 100%;
-		height 			: 100%;
-		padding-bottom 	: 3rem;
-	}
-	</style>
-</head>
+		<style>
+		/**
+		 * The body background is the key color 
+		 * The feedback prefix is used for this example
+		 */
+		body {
+			background-color: #FF6200; /* This is the initial 'middle' color */
+	    	transition: 1200ms; /* color change duration */
+		}
+		/**
+		 * All h1's that start with feedbackHeading
+		 * Note: using important to overwrite The Guide
+		 */
+		.feedbackHeading {
+			color 		: #FFF !important;
+			text-align 	: center;
+		}
+		/**
+		 * The bold edition...
+		 * Note: using important to overwrite The Guide
+		 */
+		.feedbackHeading-normal {
+			color 		: #FFF !important;
+			text-align 	: center;
+			font-style 	: normal !important;
+			font-weight : normal !important;
+		}
+		/**
+		 * The head container is used to overlap images
+		 */
+		.feedbackHeadContainer {
+			position	: relative;
+			width		: 52%;
+			height		: 52%;
+			left 		: 50%;
+			margin-left : -26%;
+		}
+		/**
+		 * The feedback head
+		 * Note I: Note how sizes are set in %, this is for responsiveness
+		 */
+		img[class^="feedbackHead"]{
+			position		: relative;
+			width			: 100%;
+			height 			: 100%;
+			padding-bottom 	: 3rem;
+			animation-duration: 4s; /* init animation */
+		    transform-origin:50% 50%;
+		    animation-iteration-count: infinite;
+		    animation-timing-function: linear;
+		}
+		/**
+		 * Animations
+		 */ 
+		.feedbackHeadCircle {
+		    transform-origin:50% 50%;
+		    animation-iteration-count: infinite;
+		    animation-timing-function: linear;
+		    animation-name: feedbackHeadCircle_C; /* init animation */
+		}
+		/**
+		 * Keyframe animations
+		 */
+		@keyframes feedbackHeadCircle_A {
+		    0% { transform: translate(2px, 1px) rotate(0deg); }
+		    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+		    20% { transform: translate(-3px, 0px) rotate(1deg); }
+		    30% { transform: translate(0px, 2px) rotate(0deg); }
+		    40% { transform: translate(1px, -1px) rotate(1deg); }
+		    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+		    60% { transform: translate(-3px, 1px) rotate(0deg); }
+		    70% { transform: translate(2px, 1px) rotate(-1deg); }
+		    80% { transform: translate(-1px, -1px) rotate(1deg); }
+		    90% { transform: translate(2px, 2px) rotate(0deg); }
+		    100% { transform: translate(1px, -2px) rotate(-1deg); }
+		}
+		@keyframes feedbackHeadCircle_B {
+			25%  { transform: rotateY(42deg); }
+		    75%  { transform: rotateY(-42deg); }
+		    100%  { transform: rotateY(0deg); }
+		}
+		@keyframes feedbackHeadCircle_C {
+		    0%   { transform: translate(2px, 1px) rotate(0deg); }
+		    10%  { transform: translate(-1px, -2px) rotate(-1deg); }
+		    20%  { transform: translate(-3px, 0px) rotate(1deg); }
+		    30%  { transform: translate(0px, 2px) rotate(0deg); }
+		    40%  { transform: translate(1px, -1px) rotate(1deg); }
+		    50%  { transform: translate(-1px, 2px) rotate(-1deg); }
+		    60%  { transform: translate(-3px, 1px) rotate(0deg); }
+		    70%  { transform: translate(2px, 1px) rotate(-1deg); }
+		    80%  { transform: translate(-1px, -1px) rotate(1deg); }
+		    90%  { transform: translate(2px, 2px) rotate(0deg); }
+		    100% { transform: translate(1px, -2px) rotate(-1deg); }
+		}
+		@keyframes feedbackHeadCircle_D {
+			12%  { transform: rotateX(42deg); }
+		    24%  { transform: rotateX(-42deg); }
+		    36%  { transform: rotateX(0deg); }
+		}
+		@keyframes feedbackHeadCircle_E {
+			38%  { transform: rotate(0deg); }
+		    50%  { transform: rotate(360deg); }
+		    62%  { transform: rotate(360deg); }
+		    100% { transform: rotate(360deg); }
+		}
+		/**
+		 * Misc CSS
+		 */
+		.feedbackHeadFace {
+			opacity: 0;
+		}
+		.active {
+			opacity: 1;
+		}
+		#step {
+			position: absolute;
+		    top: 21%;
+		    width: 56%;
+		    height: 56%;
+		    left: 21%;
+		}
+		.logo {
+			position: relative;
+		    width: 40%;
+		    left: 50%;
+		    margin-left: -20%;
+		    padding-bottom: 1.5rem;
+		    padding-top: .5rem;
+		}
+		</style>
+	</head>
 	<body class="tg"> <!-- ENABLE THE GUIDE -->
 		<main role="main">
 			<div class="row"> <!-- APP LIVES IN A SINGLE THE-GUIDE-ROW -->
 				<div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3"> <!-- INITIATE THE COLUMNS -->
+					<img src="svg/logo.svg" class="logo"><!-- ING LOGO -->
 					<h1 class="heading-b-xxl feedbackHeading">You visited an ING<br>branch office</h1>
 					<h1 class="heading-b-xxl feedbackHeading-normal">How big is your smile?</h1>
-
 					<div class="feedbackHeadContainer">
+						<!-- THIS IS THE CIRCLE AROUND THE FACE -->
 						<img src="svg/head.svg" class="feedbackHeadCircle">
+						<!-- THESE ARE THE 5 FACIAL EXPRESSIONS -->
+						<img src="svg/stepC.svg" id="step" class="feedbackHeadFace active">
 					</div>
-
 					<!-- THE SLIDER -->
 					<div id="slider"></div>
-
 				</div>
 			</div>
 		</main>
@@ -79,6 +166,8 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 		<!-- CREATING THE SLIDER AND SOME ADDITIONAL ANIMATIONS WITH JQUERY UI -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+		<!-- TOUCH SUPPORT -->
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
 		<!-- THE ACTUAL JS -->
 		<script>
 		/**
@@ -88,40 +177,138 @@
 		 */
 		$(function() {
 
+			/**
+			 * Animate the background color
+			 */
 			function animateColor(color){
-				$('body').animate({
-		        	backgroundColor: color
-		        }, 'fast');
+				$('body')
+					.css({
+			        	backgroundColor: color
+			        });
 			}
 
-			$('#slider').slider({
-				value 	: 3,
-				min 	: 1,
-				max 	: 5,
-				step 	: 1,
-			  	slide: function( event, ui ) {
-					/**
-					 * Somebody slided, do something...
-					 */
-					switch (ui.value) {
-					    case 1:
-					        animateColor('#525199');
-					        break;
-					    case 2:
-					        animateColor('#60A6DA');
-					        break;
-					    case 3:
-					        animateColor('#FF6200');
-					        break;
-					    case 4:
-					        animateColor('#349651');
-					        break;
-					    case 5:
-					        animateColor('#AB0066');
-					        break;
-					}
-			  	}
-			});
+			/**
+			 * Set the header image
+			 */
+			function setHeadImage(i){
+				$('.feedbackHeadFace')
+					.attr('src', 'svg/step' + i + '.svg')
+			}
+
+			/**
+			 * Set the animation
+			 * i = which animation
+			 * fhb = f = face, h = head, b = both
+			 */
+			function setAnimation(i, fhb){
+				/**
+				 * Switches for type of animation
+				 */
+				switch (fhb) {
+					case 'f':
+						$('img[class^="feedbackHead"]')
+							.css({
+								'animation-name': ''
+							});
+						$('.feedbackHeadCircle')
+							.css('animation-name', 'feedbackHeadCircle_' + i);
+						break;
+					case 'h':
+						$('img[class^="feedbackHead"]')
+							.css({
+								'animation-name': ''
+							});
+						$('.feedbackHeadCircle')
+							.css('animation-name', 'feedbackHeadCircle_' + i);
+						break;
+					case 'b':
+						$('img[class^="feedbackHead"]')
+							.css({
+								'animation-name': 'feedbackHeadCircle_' + i
+							});
+						break;
+				}
+
+				/**
+				 * Switches for duration of animation
+				 */
+				switch (i) {
+					case 'A':
+						$('img[class^="feedbackHead"]')
+							.css({
+								'animation-duration': '500ms'
+							});
+						break;
+					case 'B':
+						$('img[class^="feedbackHead"]')
+							.css({
+								'animation-duration': '6s'
+							});
+						break;
+					case 'C':
+						$('img[class^="feedbackHead"]')
+							.css({
+								'animation-duration': '4s'
+							});
+						break;
+					case 'D':
+						$('img[class^="feedbackHead"]')
+							.css({
+								'animation-duration': '2s'
+							});
+						break;
+					case 'E':
+						$('img[class^="feedbackHead"]')
+							.css({
+								'animation-duration': '5s'
+							});
+						break;
+				}
+
+			}
+
+			/**
+			 * INIT slider
+			 */
+			$('#slider')
+				.slider({
+					value 	: 3,
+					min 	: 1,
+					max 	: 5,
+					step 	: 1,
+				  	slide: function( event, ui ) {
+						/**
+						 * Somebody slided, do something...
+						 */
+						switch (ui.value) {
+						    case 1:
+						        animateColor('#525199');
+						        setAnimation('A', 'b');
+						        setHeadImage('A');
+						        break;
+						    case 2:
+						        animateColor('#60A6DA');
+						        setAnimation('B', 'b');
+						        setHeadImage('B');
+						        break;
+						    case 3:
+						        animateColor('#FF6200');
+						        setAnimation('C', 'f');
+						        setHeadImage('C');
+						        break;
+						    case 4:
+						        animateColor('#349651');
+						        setAnimation('D', 'b');
+						        setHeadImage('D');
+						        break;
+						    case 5:
+						        animateColor('#AB0066');
+						        setAnimation('E', 'b');
+						        setHeadImage('E');
+						        break;
+						}
+				  	}
+				});
 		});
 		</script>
 	</body>
