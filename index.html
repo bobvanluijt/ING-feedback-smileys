@@ -1,0 +1,132 @@
+<!-- THE GOAL IS A TUTORIAL FOR BUILDING THE FEEDBACK HTML APP -->
+<!-- CONTACT: bob.van.luijt@ing.nl / @bobvanluijt -->
+<!-- TO UNDERSTAND THE APP, READ THE CSS AND JS COMMENTS -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ING feedback - Do You Love Us?</title>
+	<!-- USING ING'S THE GUIDE -->
+	<link rel="stylesheet" href="https://www.ing.nl/assets/web/ng/css/b05259ab.the-guide-styles-responsive.min.css">
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+
+	<style>
+	/**
+	 * The body background is the key color 
+	 * The feedback prefix is used for this example
+	 */
+	body {
+		background-color: #FF6200; /* This is the initial 'middle' color */
+	}
+	/**
+	 * All h1's that start with feedbackHeading
+	 * Note: using important to overwrite The Guide
+	 */
+	.feedbackHeading {
+		color 		: #FFF !important;
+		text-align 	: center;
+	}
+	/**
+	 * The bold edition...
+	 * Note: using important to overwrite The Guide
+	 */
+	.feedbackHeading-normal {
+		color 		: #FFF !important;
+		text-align 	: center;
+		font-style 	: normal !important;
+		font-weight : normal !important;
+	}
+	/**
+	 * The head container is used to overlap images
+	 */
+	.feedbackHeadContainer {
+		position	: relative;
+		width		: 64%;
+		height		: 64%;
+		left 		: 50%;
+		margin-left : -32%;
+	}
+	/**
+	 * The feedback head
+	 * Note I: Note how sizes are set in %, this is for responsiveness
+	 */
+	img[class^="feedbackHead"]{
+		position		: relative;
+		width			: 100%;
+		height: width	: 100%;
+		padding-bottom 	: 3rem;
+	}
+	</style>
+</head>
+	<body class="tg"> <!-- ENABLE THE GUIDE -->
+		<main role="main">
+			<div class="row"> <!-- APP LIVES IN A SINGLE THE-GUIDE-ROW -->
+				<div class="col-xxs-10 col-xxs-offset-1 col-sm-6 col-sm-offset-3"> <!-- INITIATE THE COLUMNS -->
+					<h1 class="heading-b-xxl feedbackHeading">You visited an ING<br>branch office</h1>
+					<h1 class="heading-b-xxl feedbackHeading-normal">How big is your smile?</h1>
+
+					<div class="feedbackHeadContainer">
+						<img src="svg/head.svg" class="feedbackHeadCircle">
+					</div>
+
+					<!-- THE SLIDER -->
+					<div id="slider"></div>
+
+
+
+
+
+				</div>
+			</div>
+		</main>
+		<!-- SOME JQUERY LOVE! -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+		<!-- CREATING THE SLIDER AND SOME ADDITIONAL ANIMATIONS WITH JQUERY UI -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+		<!-- THE ACTUAL JS -->
+		<script>
+		/**
+		 * The actual JS app
+		 * Note I: how the functions are hoisted
+		 * Note II: SpectINGular uses Angular, so you should use jQuery's noconflict
+		 */
+		$(function() {
+
+			function animateColor(color){
+				$('body').animate({
+		        	backgroundColor: color
+		        }, 'fast');
+			}
+
+			$('#slider').slider({
+				value 	: 3,
+				min 	: 1,
+				max 	: 5,
+				step 	: 1,
+			  	slide: function( event, ui ) {
+					/**
+					 * Somebody slided, do something...
+					 */
+					switch (ui.value) {
+					    case 1:
+					        animateColor('#525199');
+					        break;
+					    case 2:
+					        animateColor('#60A6DA');
+					        break;
+					    case 3:
+					        animateColor('#FF6200');
+					        break;
+					    case 4:
+					        animateColor('#349651');
+					        break;
+					    case 5:
+					        animateColor('#AB0066');
+					        break;
+					}
+			  	}
+			});
+		});
+		</script>
+	</body>
+</html>
