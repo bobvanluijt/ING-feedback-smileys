@@ -75,8 +75,22 @@
 		    animation-name 				: feedbackHeadCircle_C; /* init animation */
 		}
 		/**
+		 * Zooms in and out once
+		 */
+		.zoomOnce {
+			animation-name : zoomOnce;
+			animation-duration: 600ms;
+			animation-iteration-count: 1;
+		    animation-timing-function: linear;
+		}
+		/**
 		 * Keyframe animations
 		 */
+		@keyframes zoomOnce {
+			50% {
+				transform: scale(2.25)
+			}
+		}
 		@keyframes feedbackHeadCircle_A {
 		    0%   { transform: translate(2px, 1px) rotate(0deg); }
 		    10%  { transform: translate(-1px, -2px) rotate(-1deg); }
@@ -131,14 +145,14 @@
 		#step {
 			position: absolute;
 		    top 	: 27%;
-		    width 	: 56%;
-		    height 	: 56%;
-		    left 	: 21%;
+		    width 	: 45%;
+		    height 	: 59%;
+		    left 	: 27%;
 		}
 		.logo {
-			position	: relative;
-		    width 	 	: 40%;
-		    left 		: 50%;
+			position		: relative;
+		    width 	 		: 40%;
+		    left 			: 50%;
 		    margin-left 	: -20%;
 		    padding-bottom 	: 1.5rem;
 		    padding-top 	: .5rem;
@@ -279,7 +293,7 @@
 					min 	: 1,
 					max 	: 5,
 					step 	: 1,
-				  	slide: function( event, ui ) {
+				  	change: function( event, ui ) {
 						/**
 						 * Somebody slided, do something...
 						 */
@@ -312,6 +326,21 @@
 						}
 				  	}
 				});
+			/**
+			 * Animation that starts on load
+			 */
+			$('.ui-slider-handle')
+				.addClass('zoomOnce');
+			setTimeout(function(){
+				$('#slider')
+					.slider('value', 4);
+			}, 1000)
+			setTimeout(function(){
+				$('#slider')
+					.slider('value', 3);
+			}, 1750)
+
+
 		});
 		</script>
 	</body>
