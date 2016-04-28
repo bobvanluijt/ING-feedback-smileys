@@ -142,8 +142,8 @@
 			width: 100vw;
 		}
 		.smilingdx {
-			position: absolute;
-			left: 100vw;
+			position: fixed;
+			/* left: 100vw; */
 			width: 100vw;
 			margin-top: 11rem;
 		}
@@ -181,6 +181,51 @@
 		    position: absolute;
 		    height: 1px;
 		}
+		/**
+		 * All statusbar related
+		 */
+		.statusBar {
+			position: fixed;
+		    width: 20rem;
+		    height: 20px;
+		    left: 50%;
+		    margin-left: -10rem;
+		}
+		div[class^="statusCircle_"]{
+			position: relative;
+			float: left;
+			background-color: #FFF;
+			width:0.6rem;
+			height:0.6rem;
+			border-radius: 50%;
+			margin-left: 1.5rem;
+		}
+		.statusCircle_1 {
+			margin-left: 5.25rem !important;
+			opacity: 0.5;
+		}
+		.statusCircle_2 {
+			opacity: 0.5;
+		}
+		.statusCircle_3 {
+			opacity: 0.5;
+		}
+		.statusCircle_4 {
+			opacity: 0.5;
+		}
+		.statusCircle_5 {
+			opacity: 0.5;
+		}
+		/**
+		 * Swipe img
+		 */
+		.swipeImg {
+		    position: relative;
+			left: 50%;
+			width: 4rem;
+		    margin-left: -1.65rem;
+		    margin-top: 0.5rem;
+		}
 		</style>
 	</head>
 	<body class="tg"> <!-- ENABLE THE GUIDE -->
@@ -200,6 +245,16 @@
 						<!-- THESE ARE THE 5 FACIAL EXPRESSIONS -->
 						<img src="svg/stepC.svg" id="step" class="feedbackHeadFace active">
 					</div>
+					<!-- STATUS -->
+					<div class="statusBar">
+						<div class="statusCircle_1"></div>
+						<div class="statusCircle_2"></div>
+						<div class="statusCircle_3"></div>
+						<div class="statusCircle_4"></div>
+						<div class="statusCircle_5"></div>
+					</div>
+					<!-- SWIPE IMAGE -->
+					<img class="swipeImg" src="svg/swipe.svg">
 					<!-- THE SLIDER -->
 					<div id="slider"></div>
 				</div>
@@ -254,8 +309,6 @@
 		    window.ontouchmove = null;  
 		    document.onkeydown = null;  
 		}
-
-
 
 		(function($){
 		  '$:nomunge'; // Used by YUI compressor.
@@ -392,6 +445,29 @@
 			 * Set variables
 			 */
 			var SETSLIDER = false; // the 'pingpong' does change the slider on going back, but not after the animation
+
+			/**
+			 *
+			 */
+			function initAnimate(scrollLeftInit){
+
+				if( $(document).scrollLeft() < scrollLeftInit ){
+					animateDocumentBack(-1);
+					if(SETSLIDER === true){
+						SETSLIDER = false;
+					} else {
+						SETSLIDER = true;
+					}
+				} else {
+					animateDocumentBack(1);
+					if(SETSLIDER === true){
+						SETSLIDER = false;
+					} else {
+						SETSLIDER = true;
+					}
+				}
+				return $(document).scrollLeft();
+			}
 
 			/**
 			 * Animate the background color
@@ -540,22 +616,58 @@
 						i = 0;
 					}
 
-					$('#slider').slider('value', $('#slider').slider('value') + i);
+					/**
+					 * Set the slider
+					 */
+					$('#slider')
+						.slider('value', $('#slider').slider('value') + i);
 
+					/**
+					 * Fadeout swipe button
+					 */
+					if($('#slider').slider('value') !== 3){
+						$('.swipeImg')
+							.fadeOut('fast');
+					}
+
+					/**
+					 * Set the correct ball
+					 */
+					$('.statusCircle_1, .statusCircle_2, .statusCircle_3, .statusCircle_4, .statusCircle_5')
+						.css('opacity', 0.5);
+					$('.statusCircle_' + $('#slider').slider('value'))
+						.css('opacity', 1);
 				}
 
-				$('html, body')
+				$('body')
 					.animate({
-						scrollLeft: parseInt($('.smilingdx').css('left'))
-					}, 50);
+						scrollLeft: parseInt( $('.swipeFix').css('width')) * 0.33
+					}, {
+						step: function(now, fx){
+							console.log(now, fx);
+						},
+						duration: 50
+					});
+
+				$('.feedbackHeadContainer')
+					.animate({  borderSpacing: 0 }, {
+					    step: function(now,fx) {
+					      $(this).css('transform','rotate('+now+'deg)');  
+					    },
+					    duration: 50
+					}, 'linear');
+
+				scrollHeadI = 0;
+				
 			}
 
 			/**
 			 * Hard set of the document
 			 */
 			function setDocumentBack(){
+				
 				$('html, body')
-					.scrollLeft( parseInt($('.smilingdx').css('left')) );
+					.scrollLeft( parseInt( $('.swipeFix').css('width')) * 0.33 );
 
 				SETSLIDER = true;
 
@@ -565,32 +677,27 @@
 			/**
 			 * Get scroll
 			 */
-			var scrollLeftInit = $(document).scrollLeft();
+			var scrollLeftInit = $(document).scrollLeft(),
+				scrollLeftInitHead = scrollLeftInit,
+				scrollHeadI = 0;
 			$(document)
 				.on('scroll',function(){
 
-		  			//$('.smilingdxTop').css({
-				   	//	left: $(document).scrollLeft()
-				   	//})
+					if( $(document).scrollLeft() < scrollLeftInit ){
+						scrollHeadI = scrollHeadI + 0.5;	
+					} else {
+						scrollHeadI = scrollHeadI - 0.5;
+					}
 
+					$('.feedbackHeadContainer')
+						.css({
+							'transform': 'rotate(' + scrollHeadI + 'deg)',
+							'border-spacing': scrollHeadI
+						})
+					
 				   	$.doTimeout( 'scroll', 75, function(){
-				   		if( $(document).scrollLeft() < scrollLeftInit ){
-							animateDocumentBack(-1);
-							if(SETSLIDER === true){
-								SETSLIDER = false;
-							} else {
-								SETSLIDER = true;
-							}
-						} else {
-							animateDocumentBack(1);
-							if(SETSLIDER === true){
-								SETSLIDER = false;
-							} else {
-								SETSLIDER = true;
-							}
-						}
-						scrollLeftInit = $(document).scrollLeft();
-				   });
+				   		scrollLeftInit = initAnimate(scrollLeftInit);
+				    });
 				});
 
 		});
