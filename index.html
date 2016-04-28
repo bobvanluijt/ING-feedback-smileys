@@ -138,13 +138,12 @@
 		 * Set smilingdx 
 		 */
 		.smilingdxTop {
-			position: absolute;
-			left: 150vw;
+			position: fixed;
 			width: 100vw;
 		}
 		.smilingdx {
 			position: absolute;
-			left: 150vw;
+			left: 100vw;
 			width: 100vw;
 			margin-top: 11rem;
 		}
@@ -178,7 +177,7 @@
 			opacity: 0;
 		}
 		.swipeFix {
-		    width: 400vw; /* the width is used to have a lot of scrolling space, so there will be no back uption */
+		    width: 300vw; /* the width is used to have a lot of scrolling space, so there will be no back uption */
 		    position: absolute;
 		    height: 1px;
 		}
@@ -548,7 +547,7 @@
 				$('html, body')
 					.animate({
 						scrollLeft: parseInt($('.smilingdx').css('left'))
-					}, 90);
+					}, 50);
 			}
 
 			/**
@@ -570,11 +569,11 @@
 			$(document)
 				.on('scroll',function(){
 
-		  			$('.smilingdxTop').css({
-				   		left: $(document).scrollLeft()
-				   	})
+		  			//$('.smilingdxTop').css({
+				   	//	left: $(document).scrollLeft()
+				   	//})
 
-				   	$.doTimeout( 'scroll', 100, function(){
+				   	$.doTimeout( 'scroll', 75, function(){
 				   		if( $(document).scrollLeft() < scrollLeftInit ){
 							animateDocumentBack(-1);
 							if(SETSLIDER === true){
