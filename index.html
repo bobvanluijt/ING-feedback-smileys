@@ -138,7 +138,8 @@
 		 * Set smilingdx 
 		 */
 		.smilingdxTop {
-			position: fixed;
+			position: absolute;
+			left: 150vw;
 			width: 100vw;
 		}
 		.smilingdx {
@@ -556,8 +557,13 @@
 			 */
 			var scrollLeftInit = $(document).scrollLeft();
 			$(document)
-				.on("scroll",function(){
-				   $.doTimeout( 'scroll', 100, function(){
+				.on('scroll',function(){
+
+		  			$('.smilingdxTop').css({
+				   		left: $(document).scrollLeft()
+				   	})
+
+				   	$.doTimeout( 'scroll', 100, function(){
 				   		if( $(document).scrollLeft() < scrollLeftInit ){
 							animateDocumentBack(-1);
 							if(SETSLIDER === true){
