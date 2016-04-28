@@ -134,6 +134,12 @@
 		    100% { transform: rotate(360deg); }
 		}
 		/**
+		 * Set smilingdx 
+		 */
+		.smilingdx {
+			width: 100vw;
+		}
+		/**
 		 * Misc CSS
 		 */
 		.feedbackHeadFace {
@@ -161,11 +167,16 @@
 			width 	:90%;
 			left 	:5%;
 		}
+		.swipeFix {
+		    width: 9000px; /* the width is used to have a lot of scrolling space, so there will be no back uption */
+		    position: absolute;
+		    height: 1px;
+		}
 		</style>
 	</head>
 	<body class="tg"> <!-- ENABLE THE GUIDE -->
 		<main role="main">
-			<div class="row"> <!-- APP LIVES IN A SINGLE THE-GUIDE-ROW -->
+			<div class="row smilingdx"> <!-- APP LIVES IN A SINGLE THE-GUIDE-ROW -->
 				<div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3"> <!-- INITIATE THE COLUMNS -->
 					<img src="svg/logo.svg" class="logo"><!-- ING LOGO -->
 					<h1 class="heading-b-xxl feedbackHeading">You visited an ING<br>branch office</h1>
@@ -181,6 +192,9 @@
 				</div>
 			</div>
 		</main>
+
+		<div class="swipeFix"><!-- fix to disable swipe to history --></div>
+
 		<!-- SOME JQUERY LOVE! -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 		<!-- CREATING THE SLIDER AND SOME ADDITIONAL ANIMATIONS WITH JQUERY UI -->
@@ -326,20 +340,6 @@
 						}
 				  	}
 				});
-			/**
-			 * Animation that starts on load
-			 */
-			$('.ui-slider-handle')
-				.addClass('zoomOnce');
-			setTimeout(function(){
-				$('#slider')
-					.slider('value', 4);
-			}, 1000)
-			setTimeout(function(){
-				$('#slider')
-					.slider('value', 3);
-			}, 1750)
-
 
 		});
 		</script>
