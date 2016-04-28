@@ -530,8 +530,19 @@
 			 */
 			function animateDocumentBack(i){
 
+				/**
+				 * Can't go lower th. 1 or hire th. 5
+				 */
 				if(SETSLIDER === true){
+				
+					if($('#slider').slider('value') === 5 && i === 1){
+						i = 0;
+					} else if($('#slider').slider('value') === 1 && i === -1){
+						i = 0;
+					}
+
 					$('#slider').slider('value', $('#slider').slider('value') + i);
+
 				}
 
 				$('html, body')
