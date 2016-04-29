@@ -139,12 +139,12 @@
 		 */
 		.smilingdxTop {
 			position: absolute;
-			left: 100vw;
+			left: 50vw;
 			width: 100vw;
 		}
 		.smilingdx {
 			position: absolute;
-			left: 100vw;
+			left: 50vw;
 			width: 100vw;
 			margin-top: 11rem;
 		}
@@ -178,7 +178,7 @@
 			opacity: 0;
 		}
 		.swipeFix {
-		    width: 300vw; /* the width is used to have a lot of scrolling space, so there will be no back uption */
+		    width: 200vw; /* the width is used to have a lot of scrolling space, so there will be no back uption */
 		    position: absolute;
 		    height: 1px;
 		}
@@ -642,7 +642,7 @@
 
 				$('body')
 					.animate({
-						scrollLeft: parseInt( $('.swipeFix').css('width')) * 0.33
+						scrollLeft: parseInt( $('.swipeFix').css('width')) * 0.25
 					}, {
 						step: function(now, fx){
 							console.log(now, fx);
@@ -668,7 +668,7 @@
 			function setDocumentBack(){
 				
 				$('html, body')
-					.scrollLeft( parseInt( $('.swipeFix').css('width')) * 0.33 );
+					.scrollLeft( parseInt( $('.swipeFix').css('width')) * 0.25 );
 
 				SETSLIDER = true;
 
