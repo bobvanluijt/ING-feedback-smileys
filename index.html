@@ -571,14 +571,14 @@
 					$('.feedbackHeadContainer')
 						.animate({
 							left: '-50%'
-						}, 'fast', function(){
+						}, 'slow', function(){
 							$(this)
 								.css('left', '150%');
 							setSlider(-1);
 							$(this)
 								.animate({
 									left: '50%'
-								}, 'fast');
+								}, 'slow');
 						});
 					
 				})
@@ -586,14 +586,14 @@
 					$('.feedbackHeadContainer')
 						.animate({
 							left: '150%'
-						}, 'fast', function(){
+						}, 'slow', function(){
 							$(this)
 								.css('left', '-50%');
 							setSlider(1);
 							$(this)
 								.animate({
 									left: '50%'
-								}, 'fast');
+								}, 'slow');
 						});
 				});
 
