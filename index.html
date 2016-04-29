@@ -575,13 +575,13 @@
 			}
 
 			$('.swipeOverlay')
-				.on( 'swipeleft', function(i){
+				.on( 'swiperight', function(i){
 					$('.feedbackHeadContainer')
 						.animate({
-							left: '-50%'
+							left: '150%'
 						}, 'slow', function(){
 							$(this)
-								.css('left', '150%');
+								.css('left', '-50%');
 							setSlider(-1);
 							$(this)
 								.animate({
@@ -590,13 +590,13 @@
 						});
 					
 				})
-				.on( 'swiperight', function(i){
+				.on( 'swipeleft', function(i){
 					$('.feedbackHeadContainer')
 						.animate({
-							left: '150%'
+							left: '-50%'
 						}, 'slow', function(){
 							$(this)
-								.css('left', '-50%');
+								.css('left', '150%');
 							setSlider(1);
 							$(this)
 								.animate({
