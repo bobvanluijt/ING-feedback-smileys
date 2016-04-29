@@ -567,11 +567,34 @@
 			}
 
 			$('.swipeOverlay')
-				.on( 'swiperight', function(i){
-					setSlider(1);
-				})
 				.on( 'swipeleft', function(i){
-					setSlider(-1);
+					$('.feedbackHeadContainer')
+						.animate({
+							left: '-50%'
+						}, 'fast', function(){
+							$(this)
+								.css('left', '150%');
+							setSlider(-1);
+							$(this)
+								.animate({
+									left: '50%'
+								}, 'fast');
+						});
+					
+				})
+				.on( 'swiperight', function(i){
+					$('.feedbackHeadContainer')
+						.animate({
+							left: '150%'
+						}, 'fast', function(){
+							$(this)
+								.css('left', '-50%');
+							setSlider(1);
+							$(this)
+								.animate({
+									left: '50%'
+								}, 'fast');
+						});
 				});
 
 		});
