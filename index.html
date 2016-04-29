@@ -6,7 +6,16 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<!-- SET MOBILE SPECIFIC META -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /><!-- SET THE VIEWPORT FOR RESPONSIVENESS -->
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<script>
+	if(navigator.userAgent.match(/Android/i)){
+	    window.scrollTo(0,1);
+	}
+	</script>
+	<!-- END MOBILE SPECIFIC -->
 	<meta name="robots" content="noindex"><!-- DON'T INDEX US PLEASE... -->
 	<title>ING feedback - Do You Love Us?</title>
 		<!-- USING ING'S THE GUIDE -->
@@ -322,6 +331,9 @@
 		 * Disable mobile loading
 		 */
 		$.mobile.loading( 'hide' );
+		$( document ).on( 'mobileinit', function() {
+		    $.mobile.loader.prototype.options.disabled = true;
+		});
 
 		$(function() {
 
@@ -329,31 +341,6 @@
 			 * Set variables
 			 */
 			var SETSLIDER = false; // the 'pingpong' does change the slider on going back, but not after the animation
-
-			/**
-			 *
-			 */
-			/*
-			function initAnimate(scrollLeftInit){
-
-				if( $(document).scrollLeft() < scrollLeftInit ){
-					animateDocumentBack(-1);
-					if(SETSLIDER === true){
-						SETSLIDER = false;
-					} else {
-						SETSLIDER = true;
-					}
-				} else {
-					animateDocumentBack(1);
-					if(SETSLIDER === true){
-						SETSLIDER = false;
-					} else {
-						SETSLIDER = true;
-					}
-				}
-				return $(document).scrollLeft();
-			}
-			*/
 
 			/**
 			 * Animate the background color
@@ -485,55 +472,6 @@
 						}
 				  	}
 				});
-
-			/**
-			 * animate the document
-			 */
-
-			
-
-			/**
-			 * Hard set of the document
-			 */
-			 /*
-			function setDocumentBack(){
-				
-				$('html, body')
-					.scrollLeft( parseInt( $('.swipeFix').css('width')) * 0.25 );
-
-				SETSLIDER = true;
-
-			}
-			setDocumentBack();
-			*/
-			
-			/**
-			 * Get scroll
-			 */
-			/*
-			var scrollLeftInit = $(document).scrollLeft(),
-				scrollLeftInitHead = scrollLeftInit,
-				scrollHeadI = 0;
-			$(document)
-				.on('scroll',function(){
-
-					if( $(document).scrollLeft() < scrollLeftInit ){
-						scrollHeadI = scrollHeadI + 0.5;	
-					} else {
-						scrollHeadI = scrollHeadI - 0.5;
-					}
-
-					$('.feedbackHeadContainer')
-						.css({
-							'transform': 'rotate(' + scrollHeadI + 'deg)',
-							'border-spacing': scrollHeadI
-						})
-					
-				   	$.doTimeout( 'scroll', 75, function(){
-				   		scrollLeftInit = initAnimate(scrollLeftInit);
-				    });
-				});
-			*/
 
 			/**
 			 * Try to catch swipe
