@@ -141,12 +141,14 @@
 			position: absolute;
 			left: 0vw;
 			width: 100vw;
+			margin-left: 0px !important;
 		}
 		.smilingdx {
 			position: absolute;
 			left: 0vw;
 			width: 100vw;
-			margin-top: 11rem;
+			margin-top: 9rem;
+			margin-left: 0px !important;
 		}
 		/**
 		 * Misc CSS
@@ -191,6 +193,7 @@
 		    height: 20px;
 		    left: 50%;
 		    margin-left: -10rem;
+		    margin-top: -1rem;
 		}
 		div[class^="statusCircle_"]{
 			position: relative;
@@ -234,8 +237,8 @@
 			<div class="row smilingdxTop"> <!-- APP LIVES IN A SINGLE THE-GUIDE-ROW -->
 				<div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3"> <!-- INITIATE THE COLUMNS -->
 					<img src="svg/logo.svg" class="logo"><!-- ING LOGO -->
-					<h1 class="heading-b-xxl feedbackHeading">You visited an ING<br>branch office</h1>
-					<h1 class="heading-b-xxl feedbackHeading-normal">How big is your smile?</h1>
+					<h1 class="heading-b-xl feedbackHeading">You visited an ING<br>branch office</h1>
+					<h1 class="heading-b-xl feedbackHeading-normal">How big is your smile?</h1>
 				</div>
 			</div>
 			<div class="row smilingdx"> <!-- APP LIVES IN A SINGLE THE-GUIDE-ROW -->
@@ -265,13 +268,17 @@
 		<div class="swipeFix"><!-- fix to disable swipe to history --></div>
 
 		<!-- SOME JQUERY LOVE! -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-		<!-- CREATING THE SLIDER AND SOME ADDITIONAL ANIMATIONS WITH JQUERY UI -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	
 		<!-- MOBILE -->
 		<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+		<!-- CREATING THE SLIDER AND SOME ADDITIONAL ANIMATIONS WITH JQUERY UI -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+
 		<!-- TOUCH SUPPORT -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+		<!--script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script-->
 		<!-- THE ACTUAL JS -->
 		<script>
 		/**
@@ -452,6 +459,7 @@
 			/**
 			 *
 			 */
+			/*
 			function initAnimate(scrollLeftInit){
 
 				if( $(document).scrollLeft() < scrollLeftInit ){
@@ -471,6 +479,7 @@
 				}
 				return $(document).scrollLeft();
 			}
+			*/
 
 			/**
 			 * Animate the background color
@@ -606,67 +615,13 @@
 			/**
 			 * animate the document
 			 */
-			function animateDocumentBack(i){
 
-				/**
-				 * Can't go lower th. 1 or hire th. 5
-				 */
-				if(SETSLIDER === true){
-				
-					if($('#slider').slider('value') === 5 && i === 1){
-						i = 0;
-					} else if($('#slider').slider('value') === 1 && i === -1){
-						i = 0;
-					}
-
-					/**
-					 * Set the slider
-					 */
-					$('#slider')
-						.slider('value', $('#slider').slider('value') + i);
-
-					/**
-					 * Fadeout swipe button
-					 */
-					if($('#slider').slider('value') !== 3){
-						$('.swipeImg')
-							.fadeOut('fast');
-					}
-
-					/**
-					 * Set the correct ball
-					 */
-					$('.statusCircle_1, .statusCircle_2, .statusCircle_3, .statusCircle_4, .statusCircle_5')
-						.css('opacity', 0.5);
-					$('.statusCircle_' + $('#slider').slider('value'))
-						.css('opacity', 1);
-				}
-
-				$('body')
-					.animate({
-						scrollLeft: parseInt( $('.swipeFix').css('width')) * 0.25
-					}, {
-						step: function(now, fx){
-							console.log(now, fx);
-						},
-						duration: 50
-					});
-
-				$('.feedbackHeadContainer')
-					.animate({  borderSpacing: 0 }, {
-					    step: function(now,fx) {
-					      $(this).css('transform','rotate('+now+'deg)');  
-					    },
-					    duration: 50
-					}, 'linear');
-
-				scrollHeadI = 0;
-				
-			}
+			
 
 			/**
 			 * Hard set of the document
 			 */
+			 /*
 			function setDocumentBack(){
 				
 				$('html, body')
@@ -676,10 +631,12 @@
 
 			}
 			setDocumentBack();
+			*/
 			
 			/**
 			 * Get scroll
 			 */
+			/*
 			var scrollLeftInit = $(document).scrollLeft(),
 				scrollLeftInitHead = scrollLeftInit,
 				scrollHeadI = 0;
@@ -702,13 +659,50 @@
 				   		scrollLeftInit = initAnimate(scrollLeftInit);
 				    });
 				});
+			*/
 
 			/**
 			 * Try to catch swipe
 			 */
-			$('.feedbackHeadContainer')
-				.on( 'swipe', function(){
-					console.log('catch');
+
+			function setSlider(i){
+
+				if($('#slider').slider('value') === 5 && i === 1){
+					i = 0;
+				} else if($('#slider').slider('value') === 1 && i === -1){
+					i = 0;
+				}
+
+				/**
+				 * Set the slider
+				 */
+				$('#slider')
+					.slider('value', $('#slider').slider('value') + i);
+
+				/**
+				 * Fadeout swipe button
+				 */
+				if($('#slider').slider('value') !== 3){
+					$('.swipeImg')
+						.fadeOut('fast');
+				}
+
+				/**
+				 * Set the correct ball
+				 */
+				$('.statusCircle_1, .statusCircle_2, .statusCircle_3, .statusCircle_4, .statusCircle_5')
+					.css('opacity', 0.5);
+				$('.statusCircle_' + $('#slider').slider('value'))
+					.css('opacity', 1);
+
+			}
+
+			$('main')
+				.on( 'swiperight', function(i){
+					setSlider(1);
+				})
+				.on( 'swipeleft', function(i){
+					setSlider(-1);
 				});
 
 		});
