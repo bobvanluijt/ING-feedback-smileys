@@ -327,15 +327,16 @@
 		 * Note II: SpectINGular uses Angular, so you should use jQuery's noconflict
 		 */
 
-		/**
-		 * Disable mobile loading
-		 */
-		$.mobile.loading( 'hide' );
-		$( document ).on( 'mobileinit', function() {
-		    $.mobile.loader.prototype.options.disabled = true;
-		});
-
 		$(function() {
+
+			
+			/**
+			 * Disable mobile loading
+			 */
+			$.mobile.loading( 'hide' );
+			$( document ).on( 'mobileinit', function() {
+			    $.mobile.loader.prototype.options.disabled = true;
+			});
 
 			/**
 			 * Set variables
